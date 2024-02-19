@@ -194,14 +194,53 @@ export class Tokenizer {
     }
 
     private isDigit(c: string): boolean {
-        return /^[0-9]/.test(c);
+        return /^[0-9]$/.test(c);
     }
-
+	
+	private isHexa(c: string) : boolean {
+		return /^[0-9A-Fa-f]$/i.test(c);
+	}
+	
+	private isOcta(c:string) : boolean {
+		return /^[0-7]$/.test(c);
+	}
+	
+	private isBinary(c:string) : boolean {
+		return /^[0-1]$/.test(c);
+	}
+	
     private isIdentifier(c: string): boolean {
         return c === '_' || this.isAlpha(c) || this.isDigit(c);
     }
 
-    private number() {
+    private baseNumber() {
+        if (this.peek() === 'x') {
+			this.advance();
+			while (this.isHexa(this.peek())) {
+				this.advance();
+			}
+			this.addToken(TokenType.BIGINT);
+		} else if (this.peek() === 'o') {
+			this.advance();
+			while (this.isOcta(this.peek())) {
+				this.advance();
+			}
+			this.addToken(TokenType.BIGINT);
+		} else if (this.peek() === 'b') {
+			this.advance();
+			while (this.isBinary(this.peek())) {
+				this.advance();
+			}
+			this.addToken(TokenType.BIGINT);
+		} else {
+			while (this.isDigit(this.peek())) {
+				this.advance();
+			}
+			this.addToken(TokenType.BIGINT);
+		}
+    }
+	
+	private number() {
         while (this.isDigit(this.peek())) {
             this.advance();
         }
@@ -358,6 +397,8 @@ export class Tokenizer {
                 break;
             // Number... I wish JS had match statements :(
             case '0':
+				this.baseNumber();
+				break;
             case '1':
             case '2':
             case '3':
