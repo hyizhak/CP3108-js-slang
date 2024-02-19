@@ -1,12 +1,3 @@
-node_modules
-*.js
-!docs/jsdoc/templates/**/*.js
-!docs/lib/**/*.js
-*.map
-dist/
-.idea/
-coverage/
-
 # emacs backup files
 *~
 .DS_Store

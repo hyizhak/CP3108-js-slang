@@ -1,0 +1,55 @@
+import { StmtNS, ExprNS } from "./ast-types";
+declare type Expr = ExprNS.Expr;
+declare type Stmt = StmtNS.Stmt;
+import { Token } from "./tokenizer";
+declare class Environment {
+    source: string;
+    enclosing: Environment | null;
+    names: Map<string, Token>;
+    functions: Set<string>;
+    moduleBindings: Set<string>;
+    constructor(source: string, enclosing: Environment | null, names: Map<string, Token>);
+    lookupName(identifier: Token): number;
+    lookupNameCurrentEnv(identifier: Token): Token | undefined;
+    lookupNameCurrentEnvWithError(identifier: Token): void;
+    lookupNameParentEnvWithError(identifier: Token): void;
+    declareName(identifier: Token): void;
+    suggestNameCurrentEnv(identifier: Token): string | null;
+    suggestName(identifier: Token): string | null;
+}
+export declare class Resolver implements StmtNS.Visitor<void>, ExprNS.Visitor<void> {
+    source: string;
+    ast: Stmt;
+    environment: Environment | null;
+    constructor(source: string, ast: Stmt);
+    resolve(stmt: Stmt[] | Stmt | Expr[] | Expr | null): void;
+    varDeclNames(names: Map<string, Token>): Token[] | null;
+    visitFileInputStmt(stmt: StmtNS.FileInput): void;
+    visitFunctionDefStmt(stmt: StmtNS.FunctionDef): void;
+    visitAnnAssignStmt(stmt: StmtNS.AnnAssign): void;
+    visitAssignStmt(stmt: StmtNS.Assign): void;
+    visitAssertStmt(stmt: StmtNS.Assert): void;
+    visitForStmt(stmt: StmtNS.For): void;
+    visitIfStmt(stmt: StmtNS.If): void;
+    visitGlobalStmt(stmt: StmtNS.Global): void;
+    visitNonLocalStmt(stmt: StmtNS.NonLocal): void;
+    visitReturnStmt(stmt: StmtNS.Return): void;
+    visitWhileStmt(stmt: StmtNS.While): void;
+    visitSimpleExprStmt(stmt: StmtNS.SimpleExpr): void;
+    visitFromImportStmt(stmt: StmtNS.FromImport): void;
+    visitContinueStmt(stmt: StmtNS.Continue): void;
+    visitBreakStmt(stmt: StmtNS.Break): void;
+    visitPassStmt(stmt: StmtNS.Pass): void;
+    visitVariableExpr(expr: ExprNS.Variable): void;
+    visitLambdaExpr(expr: ExprNS.Lambda): void;
+    visitMultiLambdaExpr(expr: ExprNS.MultiLambda): void;
+    visitUnaryExpr(expr: ExprNS.Unary): void;
+    visitGroupingExpr(expr: ExprNS.Grouping): void;
+    visitBinaryExpr(expr: ExprNS.Binary): void;
+    visitBoolOpExpr(expr: ExprNS.BoolOp): void;
+    visitCompareExpr(expr: ExprNS.Compare): void;
+    visitCallExpr(expr: ExprNS.Call): void;
+    visitTernaryExpr(expr: ExprNS.Ternary): void;
+    visitLiteralExpr(expr: ExprNS.Literal): void;
+}
+export {};

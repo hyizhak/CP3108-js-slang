@@ -1,0 +1,1 @@
+{"version":3,"file":"scheme-lazy.js","sourceRoot":"","sources":["../../../../src/scm-slang/src/stdlib/scheme-lazy.ts"],"names":[],"mappings":";AAAA,yCAAyC;;;AAElC,MAAM,KAAK,GAAG,UAAU,CAAW;IACtC,OAAO,CAAC,EAAE,CAAC;AACf,CAAC,CAAA;AAFY,QAAA,KAAK,SAEjB;AAEM,MAAM,QAAQ,GAAG,UAAU,CAAM;IACpC,OAAO,CAAC,YAAY,QAAQ,IAAI,CAAC,CAAC,MAAM,KAAK,CAAC,CAAC;AACnD,CAAC,CAAA;AAFY,QAAA,QAAQ,YAEpB"}

@@ -1,0 +1,110 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.TokenType = void 0;
+// Token names mostly identical to CPython https://github.com/python/cpython/blob/main/Lib/token.py.
+// Main difference is that keywords are also a token type while in CPython they are generic name.
+// We could also resolve special names at AST parse time.
+// Also renamed some token names to make more sense.
+var TokenType;
+(function (TokenType) {
+    //// Source S1
+    TokenType[TokenType["ENDMARKER"] = 0] = "ENDMARKER";
+    TokenType[TokenType["NAME"] = 1] = "NAME";
+    TokenType[TokenType["NUMBER"] = 2] = "NUMBER";
+    TokenType[TokenType["BIGINT"] = 3] = "BIGINT";
+    TokenType[TokenType["STRING"] = 4] = "STRING";
+    TokenType[TokenType["NEWLINE"] = 5] = "NEWLINE";
+    TokenType[TokenType["INDENT"] = 6] = "INDENT";
+    TokenType[TokenType["DEDENT"] = 7] = "DEDENT";
+    TokenType[TokenType["LPAR"] = 8] = "LPAR";
+    TokenType[TokenType["RPAR"] = 9] = "RPAR";
+    TokenType[TokenType["COLON"] = 10] = "COLON";
+    TokenType[TokenType["DOUBLECOLON"] = 11] = "DOUBLECOLON";
+    TokenType[TokenType["COMMA"] = 12] = "COMMA";
+    TokenType[TokenType["PLUS"] = 13] = "PLUS";
+    TokenType[TokenType["MINUS"] = 14] = "MINUS";
+    TokenType[TokenType["BANG"] = 15] = "BANG";
+    TokenType[TokenType["STAR"] = 16] = "STAR";
+    TokenType[TokenType["SLASH"] = 17] = "SLASH";
+    TokenType[TokenType["VBAR"] = 18] = "VBAR";
+    TokenType[TokenType["AMPER"] = 19] = "AMPER";
+    TokenType[TokenType["LESS"] = 20] = "LESS";
+    TokenType[TokenType["GREATER"] = 21] = "GREATER";
+    TokenType[TokenType["EQUAL"] = 22] = "EQUAL";
+    TokenType[TokenType["PERCENT"] = 23] = "PERCENT";
+    TokenType[TokenType["DOUBLEEQUAL"] = 24] = "DOUBLEEQUAL";
+    TokenType[TokenType["NOTEQUAL"] = 25] = "NOTEQUAL";
+    TokenType[TokenType["LESSEQUAL"] = 26] = "LESSEQUAL";
+    TokenType[TokenType["GREATEREQUAL"] = 27] = "GREATEREQUAL";
+    TokenType[TokenType["DOUBLESTAR"] = 28] = "DOUBLESTAR";
+    // Special identifiers
+    TokenType[TokenType["AND"] = 29] = "AND";
+    TokenType[TokenType["OR"] = 30] = "OR";
+    TokenType[TokenType["FOR"] = 31] = "FOR";
+    TokenType[TokenType["WHILE"] = 32] = "WHILE";
+    TokenType[TokenType["NONE"] = 33] = "NONE";
+    TokenType[TokenType["TRUE"] = 34] = "TRUE";
+    TokenType[TokenType["FALSE"] = 35] = "FALSE";
+    TokenType[TokenType["IS"] = 36] = "IS";
+    TokenType[TokenType["NOT"] = 37] = "NOT";
+    TokenType[TokenType["ISNOT"] = 38] = "ISNOT";
+    TokenType[TokenType["PASS"] = 39] = "PASS";
+    TokenType[TokenType["DEF"] = 40] = "DEF";
+    TokenType[TokenType["LAMBDA"] = 41] = "LAMBDA";
+    TokenType[TokenType["FROM"] = 42] = "FROM";
+    TokenType[TokenType["DOUBLESLASH"] = 43] = "DOUBLESLASH";
+    TokenType[TokenType["BREAK"] = 44] = "BREAK";
+    TokenType[TokenType["CONTINUE"] = 45] = "CONTINUE";
+    TokenType[TokenType["RETURN"] = 46] = "RETURN";
+    TokenType[TokenType["ASSERT"] = 47] = "ASSERT";
+    TokenType[TokenType["IMPORT"] = 48] = "IMPORT";
+    TokenType[TokenType["GLOBAL"] = 49] = "GLOBAL";
+    TokenType[TokenType["NONLOCAL"] = 50] = "NONLOCAL";
+    TokenType[TokenType["IF"] = 51] = "IF";
+    TokenType[TokenType["ELSE"] = 52] = "ELSE";
+    TokenType[TokenType["ELIF"] = 53] = "ELIF";
+    TokenType[TokenType["IN"] = 54] = "IN";
+    TokenType[TokenType["NOTIN"] = 55] = "NOTIN";
+    //// Source s3
+    TokenType[TokenType["RSQB"] = 56] = "RSQB";
+    TokenType[TokenType["LSQB"] = 57] = "LSQB";
+    TokenType[TokenType["ELLIPSIS"] = 58] = "ELLIPSIS";
+    //// Unusued - Found in normal Python
+    TokenType[TokenType["SEMI"] = 59] = "SEMI";
+    TokenType[TokenType["DOT"] = 60] = "DOT";
+    TokenType[TokenType["LBRACE"] = 61] = "LBRACE";
+    TokenType[TokenType["RBRACE"] = 62] = "RBRACE";
+    TokenType[TokenType["TILDE"] = 63] = "TILDE";
+    TokenType[TokenType["CIRCUMFLEX"] = 64] = "CIRCUMFLEX";
+    TokenType[TokenType["LEFTSHIFT"] = 65] = "LEFTSHIFT";
+    TokenType[TokenType["RIGHTSHIFT"] = 66] = "RIGHTSHIFT";
+    TokenType[TokenType["PLUSEQUAL"] = 67] = "PLUSEQUAL";
+    TokenType[TokenType["MINEQUAL"] = 68] = "MINEQUAL";
+    TokenType[TokenType["STAREQUAL"] = 69] = "STAREQUAL";
+    TokenType[TokenType["SLASHEQUAL"] = 70] = "SLASHEQUAL";
+    TokenType[TokenType["PERCENTEQUAL"] = 71] = "PERCENTEQUAL";
+    TokenType[TokenType["AMPEREQUAL"] = 72] = "AMPEREQUAL";
+    TokenType[TokenType["VBAREQUAL"] = 73] = "VBAREQUAL";
+    TokenType[TokenType["CIRCUMFLEXEQUAL"] = 74] = "CIRCUMFLEXEQUAL";
+    TokenType[TokenType["LEFTSHIFTEQUAL"] = 75] = "LEFTSHIFTEQUAL";
+    TokenType[TokenType["RIGHTSHIFTEQUAL"] = 76] = "RIGHTSHIFTEQUAL";
+    TokenType[TokenType["DOUBLESTAREQUAL"] = 77] = "DOUBLESTAREQUAL";
+    TokenType[TokenType["DOUBLESLASHEQUAL"] = 78] = "DOUBLESLASHEQUAL";
+    TokenType[TokenType["AT"] = 79] = "AT";
+    TokenType[TokenType["ATEQUAL"] = 80] = "ATEQUAL";
+    TokenType[TokenType["RARROW"] = 81] = "RARROW";
+    TokenType[TokenType["COLONEQUAL"] = 82] = "COLONEQUAL";
+    TokenType[TokenType["OP"] = 83] = "OP";
+    TokenType[TokenType["AWAIT"] = 84] = "AWAIT";
+    TokenType[TokenType["ASYNC"] = 85] = "ASYNC";
+    TokenType[TokenType["TYPE_IGNORE"] = 86] = "TYPE_IGNORE";
+    TokenType[TokenType["TYPE_COMMENT"] = 87] = "TYPE_COMMENT";
+    TokenType[TokenType["YIELD"] = 88] = "YIELD";
+    TokenType[TokenType["WITH"] = 89] = "WITH";
+    TokenType[TokenType["DEL"] = 90] = "DEL";
+    TokenType[TokenType["TRY"] = 91] = "TRY";
+    TokenType[TokenType["EXCEPT"] = 92] = "EXCEPT";
+    TokenType[TokenType["FINALLY"] = 93] = "FINALLY";
+    TokenType[TokenType["RAISE"] = 94] = "RAISE";
+})(TokenType = exports.TokenType || (exports.TokenType = {}));
+//# sourceMappingURL=tokens.js.map
